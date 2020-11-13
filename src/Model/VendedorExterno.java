@@ -1,19 +1,30 @@
 package Model;
 
-import java.util.TreeSet;
-
 public class VendedorExterno extends Vendedor {
 	private double ajudaCusto;
-	private TreeSet<Integer> idsDosCliente = new TreeSet<Integer>();
-	
-	
+	private ClienteExterno cliente;
+
 	// methods
+	public String toString() {
+		return getID() + ":" + getNome() + ":" + getTelefone() + ":" + getDataDeNascimento() + ":" + getSalario() + ":"
+				+ getComissao() + ":" + getAjudaCusto() + ":" + getCliente();
+
+	}
+
 	public double calcularPagamento() {
 		double resultado = getSalario() + getAjudaCusto() + (getSalario() * getComissao());
 		return resultado;
 	}
 
 	// getters and setters
+	public ClienteExterno getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(ClienteExterno cliente) {
+		this.cliente = cliente;
+	}
+
 	public double getAjudaCusto() {
 		return ajudaCusto;
 	}
@@ -22,13 +33,4 @@ public class VendedorExterno extends Vendedor {
 		this.ajudaCusto = ajudaCusto;
 	}
 
-	public TreeSet<Integer> getIdsDosCliente() {
-		return idsDosCliente;
-	}
-
-	public void setIdsDosCliente(TreeSet<Integer> idsDosCliente) {
-		this.idsDosCliente = idsDosCliente;
-	}
-
-	
 }

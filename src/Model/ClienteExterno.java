@@ -1,17 +1,19 @@
 package Model;
 
-public class ClienteExterno {
-	private int idVendedorVinculado;
+import java.time.LocalDate;
 
-	
-	
-	
-	//getters and setters
-	public int getIdVendedorVinculado() {
-		return idVendedorVinculado;
+public class ClienteExterno extends Pessoa {
+
+	public ClienteExterno() {
+		
 	}
-
-	public void setIdVendedorVinculado(int idVendedorVinculado) {
-		this.idVendedorVinculado = idVendedorVinculado;
+	public ClienteExterno(int id, String nome, String telefone, LocalDate dataDeNascimento ) {
+		setID(id);
+		setNome(nome);
+		setTelefone(telefone);
+		setDataDeNascimento(dataDeNascimento);
+	}
+	public String toString() {
+		return getID() + ":" + getNome() + ":" + getTelefone() + ":" + getDataDeNascimento() ; 
 	}
 }

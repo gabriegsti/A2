@@ -5,8 +5,8 @@ import java.time.LocalDate;
 public abstract class Pessoa implements Comparable<Pessoa> {
 	
 	private int ID;
-	private int nome;
-	private int telefone;
+	private String nome;
+	private String telefone;
 	private LocalDate dataDeNascimento;
 		
 	// methods
@@ -27,16 +27,16 @@ public abstract class Pessoa implements Comparable<Pessoa> {
 	public void setID(int iD) {
 		ID = iD;
 	}
-	public int getNome() {
+	public String getNome() {
 		return nome;
 	}
-	public void setNome(int nome) {
+	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public int getTelefone() {
+	public String getTelefone() {
 		return telefone;
 	}
-	public void setTelefone(int telefone) {
+	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
 	public LocalDate getDataDeNascimento() {

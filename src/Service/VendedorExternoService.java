@@ -4,16 +4,17 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.TreeSet;
 
-import Model.VendedorLoja;
+import Model.VendedorExterno;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public class VendedorLojaService extends Application {
-	private static Stage telaVendedorLojaStage = new Stage();
+public class VendedorExternoService extends Application {
+	private static Stage telaVendedorExternoStage = new Stage();
 	File arquivo = null;
 	FileWriter recebearquivo = null;
 	BufferedWriter escreve = null;
@@ -45,15 +46,14 @@ public class VendedorLojaService extends Application {
 			System.out.println(" Erro ao tentar fechar o arquivo: " + e.getMessage());
 
 		}
+
 	}
 
-	public void gravaTextoNoArquivo(VendedorLoja v) {
+	public void gravaVendedorEmTexto(VendedorExterno v) {
 		abreUmArquivo();
-
-		String registro = v.getID() + ":" + v.getNome() + ":" + v.getTelefone() + ":" + v.getDataDeNascimento() + ":"
-				+ v.getComissao() + ":" + v.getHoraExtra();
+		 
 		try {
-			escreve.write(registro);
+			escreve.write(v.toString());
 			escreve.newLine();
 
 		} catch (IOException e) {
@@ -63,11 +63,16 @@ public class VendedorLojaService extends Application {
 		}
 	}
 
-	// Abre a janela corrente
+	public void gravaTreeSetDeVendedoresExternosEmTexto(TreeSet<VendedorExterno> v) {
+		for (VendedorExterno umVendedorExterno : v) {
+			gravaVendedorEmTexto(umVendedorExterno);
+		}
+	}
+
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			Pane root = FXMLLoader.load(getClass().getResource("../View/CadastroVendedorLoja.fxml"));
+			Pane root = FXMLLoader.load(getClass().getResource("../View/CadastroVendedorExterno.fxml"));
 
 			Scene scene = new Scene(root, 660, 400);
 
@@ -80,9 +85,9 @@ public class VendedorLojaService extends Application {
 	}
 
 	// Chama o método start para abrir uma nova janela.
-	public void CadastroVendedorLoja() {
+	public void TelaCadastroVendedorExterno() {
 		try {
-			start(telaVendedorLojaStage);
+			start(telaVendedorExternoStage);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -90,12 +95,12 @@ public class VendedorLojaService extends Application {
 	}
 
 	public static void close() {
-		telaVendedorLojaStage.close();
+		telaVendedorExternoStage.close();
 	}
 
 	// getters and setters
-	public Stage getTelaVendedorLojaStage() {
-		return telaVendedorLojaStage;
+	public Stage getTelaVendedorExternoStage() {
+		return telaVendedorExternoStage;
 	}
 
 }
