@@ -1,8 +1,27 @@
 package Model;
 
+import java.time.LocalDate;
+
 public class VendedorExterno extends Vendedor {
 	private double ajudaCusto;
 	private ClienteExterno cliente;
+
+	public VendedorExterno() {
+
+	}
+
+	public VendedorExterno(int id, String nome, String telefone, LocalDate dataDeNascimento, double salario,
+			double comissao, double ajudaCusto, ClienteExterno cliente) {
+		setID(id);
+		setNome(nome);
+		setTelefone(telefone);
+		setDataDeNascimento(dataDeNascimento);
+		setSalario(salario);
+		setComissao(comissao);
+		setAjudaCusto(ajudaCusto);
+		setCliente(cliente);
+
+	}
 
 	// methods
 	public String toString() {

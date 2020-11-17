@@ -1,6 +1,7 @@
 package Model;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public abstract class Pessoa implements Comparable<Pessoa> {
 	
@@ -8,7 +9,8 @@ public abstract class Pessoa implements Comparable<Pessoa> {
 	private String nome;
 	private String telefone;
 	private LocalDate dataDeNascimento;
-		
+	public static DateTimeFormatter formatter =DateTimeFormatter.ofPattern("dd/MM/uuuu"); 
+
 	// methods
 		public int compareTo(Pessoa p) {
 			if (this.getID() > p.getID()) {

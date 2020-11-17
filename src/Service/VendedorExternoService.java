@@ -57,7 +57,7 @@ public class VendedorExternoService extends Application {
 			escreve.newLine();
 
 		} catch (IOException e) {
-			System.out.println(" Erro ao tentar escrever no arquivo: " + e.getMessage());
+			System.out.println("Erro ao tentar escrever no arquivo: " + e.getMessage());
 		} finally {
 			fechaUmArquivo();
 		}
