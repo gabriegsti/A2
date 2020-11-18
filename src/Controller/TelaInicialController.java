@@ -1,24 +1,26 @@
 package Controller;
 
 import Service.TelaInicialService;
-import Service.VendedorLojaService;
+import Service.VendedorExternoService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 
 
 public class TelaInicialController {
 
-	VendedorLojaService vendedorLoja = new VendedorLojaService();
-	@FXML
-	private Label label;
+	VendedorExternoService telaVendedorExterno = new VendedorExternoService();
+	TelaInicialService tela = new TelaInicialService();
 
-	@FXML
-	private void abrirCadastrodeVendedorLojaAction(ActionEvent event) {
-		label.setText("dentro");
-		vendedorLoja.CadastroVendedorLoja();
-		TelaInicialService.close();
+	
+	public void abrirTelaInicial() {
+		tela.abrirTela();
 	}
 	
+	
+	@FXML
+	private void abrirCadastrodeVendedorExternoAction(ActionEvent event) {
+		telaVendedorExterno.abrirTela();
+		TelaInicialService.fecharTela();
+	}
 
 }

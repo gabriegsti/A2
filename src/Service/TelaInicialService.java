@@ -10,8 +10,7 @@ public class TelaInicialService extends Application {
 	private static Stage telaInicialStage = new Stage(); //Referencia da janela
 	
 	
-	
-	public void iniciar() {
+	public void abrirTela() {
 		start(telaInicialStage);
 	}
 	
@@ -31,10 +30,14 @@ public class TelaInicialService extends Application {
 			e.printStackTrace();
 		}
 	}
-	public static void close() {
+	public static void fecharTela() {
 		telaInicialStage.close();
 	}
 	
+
+
+	
+
 	
 	
 }

@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 public abstract class Pessoa implements Comparable<Pessoa> {
 	
-	private int ID;
+	private int ID = 0;
 	private String nome;
 	private String telefone;
 	private LocalDate dataDeNascimento;
@@ -13,6 +13,7 @@ public abstract class Pessoa implements Comparable<Pessoa> {
 
 	// methods
 		public int compareTo(Pessoa p) {
+			
 			if (this.getID() > p.getID()) {
 				return 1;
 			}

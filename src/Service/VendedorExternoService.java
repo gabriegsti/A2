@@ -1,11 +1,16 @@
 package Service;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.TreeSet;
 
+import Model.Pessoa;
 import Model.VendedorExterno;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -18,6 +23,10 @@ public class VendedorExternoService extends Application {
 	File arquivo = null;
 	FileWriter recebearquivo = null;
 	BufferedWriter escreve = null;
+	FileReader recebearquivoleitura = null;
+	BufferedReader leDeArquivo = null;
+	String registro;
+	TreeSet<VendedorExterno> treeSetvendedor = new TreeSet<VendedorExterno>();
 
 	public void abreUmArquivo() {
 		try {
@@ -51,7 +60,7 @@ public class VendedorExternoService extends Application {
 
 	public void gravaVendedorEmTexto(VendedorExterno v) {
 		abreUmArquivo();
-		 
+
 		try {
 			escreve.write(v.toString());
 			escreve.newLine();
@@ -62,10 +71,93 @@ public class VendedorExternoService extends Application {
 			fechaUmArquivo();
 		}
 	}
-
+	
+	
+	
+	
 	public void gravaTreeSetDeVendedoresExternosEmTexto(TreeSet<VendedorExterno> v) {
 		for (VendedorExterno umVendedorExterno : v) {
 			gravaVendedorEmTexto(umVendedorExterno);
+		}
+	}
+
+	//Salvar os dados em memória no arquivo
+	public void Salvar() {
+		gravaTreeSetDeVendedoresExternosEmTexto(treeSetvendedor);
+	}
+	
+	// Este método recebe os paramateros para cadastrar em memória o Vendedor e o
+	// Cliente do Vendedor.
+	public void CadastrarVendedorExterno(String nome, String telefone, LocalDate dataDeNascimento, double salario,
+			double comissao, double ajudaDeCusto, String clienteNome, String clienteTelefone,
+			LocalDate clienteDataDeNascimento) {
+		try {
+			lerVendedores();
+		
+
+		int id = treeSetvendedor.last().getID();
+
+		treeSetvendedor.add(new VendedorExterno(id, nome, telefone, dataDeNascimento, salario, comissao, ajudaDeCusto,
+				clienteNome, clienteTelefone, clienteDataDeNascimento));
+		} catch (IOException e) {
+			System.out.println("Falha ao tentar cadastrar Vendedor Externo" + e.getMessage());
+		}
+	}
+
+	public void abreUmArquivoLeitura() {
+		try {
+			arquivo = new File("arquivo.txt");
+
+			if (arquivo.exists()) {
+				recebearquivoleitura = new FileReader("arquivo.txt");
+				leDeArquivo = new BufferedReader(recebearquivoleitura);
+			}
+			
+
+		} catch (Exception e) {
+
+			System.out.println(" Erro ao tentar abrir arquivo: " + e.getMessage());
+		}
+	}
+
+	public void lerVendedores() throws IOException {
+		abreUmArquivoLeitura();
+		TreeSet<VendedorExterno> treeSetvendedor = new TreeSet<VendedorExterno>();
+		int id;
+		String nome;
+		String telefone;
+		LocalDate dataDeNascimento;
+		double salario;
+		double comissao;
+		double ajudaDeCusto;
+		String clienteNome;
+		String clienteTelefone;
+		LocalDate clienteDataDeNascimento;
+
+		try {
+			String[] campos;
+			
+			while ((registro = leDeArquivo.readLine()) != null) {
+				
+				campos = registro.split(":");
+				id = Integer.parseInt(campos[0].trim());
+				nome = campos[1].trim();
+				telefone = campos[2].trim();
+				dataDeNascimento = LocalDate.parse(campos[3], Pessoa.formatter);
+				salario = Double.parseDouble(campos[4].trim());
+				comissao = Double.parseDouble(campos[5].trim());
+				ajudaDeCusto = Double.parseDouble(campos[6].trim());
+				clienteNome = campos[7].trim();
+				clienteTelefone = campos[8].trim();
+				clienteDataDeNascimento = LocalDate.parse(campos[9], Pessoa.formatter);
+
+				treeSetvendedor.add(new VendedorExterno(id, nome, telefone, dataDeNascimento, salario, comissao,
+						ajudaDeCusto, clienteNome, clienteTelefone, clienteDataDeNascimento));
+			}
+		} catch (FileNotFoundException e) { // tratando quando o arquivo não existe
+			System.err.println("Erro: arquivo nao existe. " + arquivo);
+		} catch (IOException e) { // tratando quando há erro no readLine()
+			System.err.println("Erro: arquivo na leitura do arquivo: " + arquivo);
 		}
 	}
 
@@ -85,22 +177,16 @@ public class VendedorExternoService extends Application {
 	}
 
 	// Chama o método start para abrir uma nova janela.
-	public void TelaCadastroVendedorExterno() {
+	public void abrirTela() {
 		try {
 			start(telaVendedorExternoStage);
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	public static void close() {
+	public static void fecharTela() {
 		telaVendedorExternoStage.close();
-	}
-
-	// getters and setters
-	public Stage getTelaVendedorExternoStage() {
-		return telaVendedorExternoStage;
 	}
 
 }

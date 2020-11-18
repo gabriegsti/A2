@@ -11,7 +11,7 @@ public class VendedorExterno extends Vendedor {
 	}
 
 	public VendedorExterno(int id, String nome, String telefone, LocalDate dataDeNascimento, double salario,
-			double comissao, double ajudaCusto, ClienteExterno cliente) {
+			double comissao, double ajudaCusto, String clienteNome, String clienteTelefone, LocalDate clienteDataDeNascimento) {
 		setID(id);
 		setNome(nome);
 		setTelefone(telefone);
@@ -19,13 +19,14 @@ public class VendedorExterno extends Vendedor {
 		setSalario(salario);
 		setComissao(comissao);
 		setAjudaCusto(ajudaCusto);
+		ClienteExterno cliente = new ClienteExterno(clienteNome, clienteTelefone, clienteDataDeNascimento);
 		setCliente(cliente);
 
 	}
 
 	// methods
 	public String toString() {
-		return getID() + ":" + getNome() + ":" + getTelefone() + ":" + getDataDeNascimento() + ":" + getSalario() + ":"
+		return  getID() + ":" + getNome() + ":" + getTelefone() + ":" + getDataDeNascimento() + ":" + getSalario() + ":"
 				+ getComissao() + ":" + getAjudaCusto() + ":" + getCliente();
 
 	}

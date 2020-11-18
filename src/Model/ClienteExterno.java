@@ -7,8 +7,7 @@ public class ClienteExterno extends Pessoa {
 	public ClienteExterno() {
 		
 	}
-	public ClienteExterno(int id, String nome, String telefone, LocalDate dataDeNascimento ) {
-		setID(id);
+	public ClienteExterno( String nome, String telefone, LocalDate dataDeNascimento ) {
 		setNome(nome);
 		setTelefone(telefone);
 		setDataDeNascimento(dataDeNascimento);
