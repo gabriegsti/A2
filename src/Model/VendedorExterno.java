@@ -1,8 +1,16 @@
 package Model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class VendedorExterno extends Vendedor {
+public class VendedorExterno extends Vendedor implements Serializable {
+	
+	/**
+	 * Default  
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	
 	private double ajudaCusto;
 	private ClienteExterno cliente;
 

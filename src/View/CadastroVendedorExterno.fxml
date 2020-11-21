@@ -8,7 +8,7 @@
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.VendedorExternoController">
    <children>
       <Button layoutX="18.0" layoutY="9.0" mnemonicParsing="false" onAction="#VoltarParaTelaInicialAction" text="Voltar" />
-      <Button layoutX="467.0" layoutY="348.0" mnemonicParsing="false" text="Salvar" />
+      <Button layoutX="467.0" layoutY="348.0" mnemonicParsing="false" onAction="#SalvarVendedorExternoAction" text="Salvar" />
       <Button layoutX="352.0" layoutY="348.0" mnemonicParsing="false" onAction="#CadastrarVendedorExternoAction" text="Cadastrar" />
       <TextField fx:id="nometxt" layoutX="120.0" layoutY="113.0" />
       <TextField fx:id="telefonetxt" layoutX="121.0" layoutY="152.0" />
