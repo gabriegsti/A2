@@ -59,6 +59,7 @@ public class VendedorExternoService extends Application {
 
 	}
 
+	
 	public void gravaVendedorEmTexto(VendedorExterno v) {
 		abreUmArquivo();
 
@@ -73,11 +74,59 @@ public class VendedorExternoService extends Application {
 		}
 	}
 
+	public void lerVendedores() {
+
+		int id;
+		String nome;
+		String telefone;
+		LocalDate dataDeNascimento;
+		double salario;
+		double comissao;
+		double ajudaDeCusto;
+		String clienteNome;
+		String clienteTelefone;
+		LocalDate clienteDataDeNascimento;
+
+		try {
+			if (abreUmArquivoLeitura()) {
+
+				while ((registro = leDeArquivo.readLine()) != null) {
+					String[] campos = new String[11];
+					campos = registro.split(":");
+
+					id = Integer.parseInt(campos[0].trim());
+					nome = campos[1].trim();
+					telefone = campos[2].trim();
+					
+					dataDeNascimento = LocalDate.parse(campos[3].trim(),Pessoa.formatter);
+					salario = Double.parseDouble(campos[4].trim());
+					comissao = Double.parseDouble(campos[5].trim());
+					ajudaDeCusto = Double.parseDouble(campos[6].trim());
+					clienteNome = campos[7].trim();
+					clienteTelefone = campos[8].trim();
+					clienteDataDeNascimento = LocalDate.parse(campos[9].trim(), Pessoa.formatter);
+
+					treeSetvendedor.add(new VendedorExterno(id, nome, telefone, dataDeNascimento, salario, comissao,
+							ajudaDeCusto, clienteNome, clienteTelefone, clienteDataDeNascimento));
+				}
+			}
+		} catch (FileNotFoundException e) { // tratando quando o arquivo não existe
+			System.err.println("Erro: arquivo nao existe. " + arquivo);
+		} catch (IOException e) { // tratando quando há erro no readLine()
+			System.err.println("Erro na leitura do arquivo: " + arquivo);
+		} catch (Exception e) {
+			System.out.println("Erro inesperado na leitura do arquivo \n \n  ");
+			e.printStackTrace();
+		}
+	}
+	
 	public void gravaTreeSetDeVendedoresExternosEmTexto() {
 		
 		for (VendedorExterno umVendedorExterno : this.treeSetvendedorNovos) {
 			gravaVendedorEmTexto(umVendedorExterno);
 		}
+		lerVendedores();//Atualiza o treesetVendedor que mantém em memória uma lista simulando a lista do arquivo.
+		treeSetvendedorNovos.clear();// Limpa os dados desse treeset.
 	}
 
 	// Salvar os dados em memória no arquivo
@@ -90,13 +139,19 @@ public class VendedorExternoService extends Application {
 	public void CadastrarVendedorExterno(String nome, String telefone, LocalDate dataDeNascimento, double salario,
 			double comissao, double ajudaDeCusto, String clienteNome, String clienteTelefone,
 			LocalDate clienteDataDeNascimento) {
+		
 		try {
 			int id;
 			if (this.treeSetvendedor.isEmpty()) {
 				id = 1;
 			} else {
+				if(this.treeSetvendedorNovos.isEmpty()) {
 				id = this.treeSetvendedor.last().getID() + 1;
+				}else {
+					id = this.treeSetvendedorNovos.last().getID() + 1;
+				}
 			}
+			
 
 			this.treeSetvendedorNovos.add(new VendedorExterno(id, nome, telefone, dataDeNascimento, salario, comissao,
 					ajudaDeCusto, clienteNome, clienteTelefone, clienteDataDeNascimento));
@@ -122,50 +177,6 @@ public class VendedorExternoService extends Application {
 		return false;
 	}
 
-	public void lerVendedores() {
-
-		int id;
-		String nome;
-		String telefone;
-		LocalDate dataDeNascimento;
-		double salario;
-		double comissao;
-		double ajudaDeCusto;
-		String clienteNome;
-		String clienteTelefone;
-		LocalDate clienteDataDeNascimento;
-
-		try {
-			if (abreUmArquivoLeitura()) {
-
-				while ((registro = leDeArquivo.readLine()) != null) {
-					String[] campos = new String[10];
-					campos = registro.split(":");
-
-					id = Integer.parseInt(campos[0].trim());
-					nome = campos[1].trim();
-					telefone = campos[2].trim();
-					dataDeNascimento = LocalDate.parse(campos[3], Pessoa.formatter);
-					salario = Double.parseDouble(campos[4].trim());
-					comissao = Double.parseDouble(campos[5].trim());
-					ajudaDeCusto = Double.parseDouble(campos[6].trim());
-					clienteNome = campos[7].trim();
-					clienteTelefone = campos[8].trim();
-					clienteDataDeNascimento = LocalDate.parse(campos[9].intern(), Pessoa.formatter);
-
-					treeSetvendedor.add(new VendedorExterno(id, nome, telefone, dataDeNascimento, salario, comissao,
-							ajudaDeCusto, clienteNome, clienteTelefone, clienteDataDeNascimento));
-				}
-			}
-		} catch (FileNotFoundException e) { // tratando quando o arquivo não existe
-			System.err.println("Erro: arquivo nao existe. " + arquivo);
-		} catch (IOException e) { // tratando quando há erro no readLine()
-			System.err.println("Erro na leitura do arquivo: " + arquivo);
-		} catch (Exception e) {
-			System.out.println("Erro inesperado na leitura do arquivo \n \n  ");
-			e.printStackTrace();
-		}
-	}
 
 	@Override
 	public void start(Stage primaryStage) {

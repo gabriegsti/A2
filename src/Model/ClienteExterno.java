@@ -13,6 +13,6 @@ public class ClienteExterno extends Pessoa {
 		setDataDeNascimento(dataDeNascimento);
 	}
 	public String toString() {
-		return getID() + ":" + getNome() + ":" + getTelefone() + ":" + getDataDeNascimento() ; 
+		return getNome() + ":" + getTelefone() + ":" + getDataDeNascimento().format(Pessoa.formatter) ; 
 	}
 }

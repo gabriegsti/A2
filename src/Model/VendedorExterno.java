@@ -34,7 +34,7 @@ public class VendedorExterno extends Vendedor implements Serializable {
 
 	// methods
 	public String toString() {
-		return  getID() + ":" + getNome() + ":" + getTelefone() + ":" + getDataDeNascimento() + ":" + getSalario() + ":"
+		return  getID() + ":" + getNome() + ":" + getTelefone() + ":" + getDataDeNascimento().format(Pessoa.formatter) + ":" + getSalario() + ":"
 				+ getComissao() + ":" + getAjudaCusto() + ":" + getCliente();
 
 	}
