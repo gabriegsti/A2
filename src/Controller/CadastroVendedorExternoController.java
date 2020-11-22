@@ -4,16 +4,16 @@ import java.time.LocalDate;
 
 
 import Model.Pessoa;
+import Service.CadastroVendedorExternoService;
 import Service.TelaInicialService;
-import Service.VendedorExternoService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
-public class VendedorExternoController {
+public class CadastroVendedorExternoController {
 	
 	TelaInicialService telaInicial = new TelaInicialService();
-	VendedorExternoService telaVendedorExternoCadastro = new VendedorExternoService();
+	CadastroVendedorExternoService telaVendedorExternoCadastro = new CadastroVendedorExternoService();
     
 	@FXML
     private TextField nometxt;
@@ -47,7 +47,7 @@ public class VendedorExternoController {
     @FXML
 	private void VoltarParaTelaInicialAction(ActionEvent event) {
 		telaInicial.abrirTela();
-		VendedorExternoService.fecharTela();
+		CadastroVendedorExternoService.fecharTela();
 	}
     
     //Salvar os dados em memória no arquivo

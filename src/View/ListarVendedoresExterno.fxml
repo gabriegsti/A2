@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ListarVendedoresController">
+   <children>
+      <Button fx:id="btnBuscarPorId" layoutX="36.0" layoutY="60.0" mnemonicParsing="false" onAction="#buscarPorIdAction" text="Buscar por ID:" />
+      <Button fx:id="btnListarTodos" layoutX="410.0" layoutY="60.0" mnemonicParsing="false" onAction="#listarTodosAction" text="Listar todos " />
+      <TextField fx:id="BuscarPorIdtxt" layoutX="134.0" layoutY="60.0" />
+      <TextArea fx:id="listarTextArea" layoutX="47.0" layoutY="110.0" prefHeight="261.0" prefWidth="546.0" />
+      <Button layoutX="33.0" layoutY="14.0" mnemonicParsing="false" text="Voltar" />
+   </children>
+</AnchorPane>

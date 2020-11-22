@@ -1,15 +1,8 @@
 package Model;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 
-public class VendedorExterno extends Vendedor implements Serializable {
-	
-	/**
-	 * Default  
-	 */
-	private static final long serialVersionUID = 1L;
-	
+public class VendedorExterno extends Vendedor {
 	
 	private double ajudaCusto;
 	private ClienteExterno cliente;
@@ -20,7 +13,7 @@ public class VendedorExterno extends Vendedor implements Serializable {
 
 	public VendedorExterno(int id, String nome, String telefone, LocalDate dataDeNascimento, double salario,
 			double comissao, double ajudaCusto, String clienteNome, String clienteTelefone, LocalDate clienteDataDeNascimento) {
-		setID(id);
+		setId(id);
 		setNome(nome);
 		setTelefone(telefone);
 		setDataDeNascimento(dataDeNascimento);
@@ -34,7 +27,7 @@ public class VendedorExterno extends Vendedor implements Serializable {
 
 	// methods
 	public String toString() {
-		return  getID() + ":" + getNome() + ":" + getTelefone() + ":" + getDataDeNascimento().format(Pessoa.formatter) + ":" + getSalario() + ":"
+		return  getId() + ":" + getNome() + ":" + getTelefone() + ":" + getDataDeNascimento().format(Pessoa.formatter) + ":" + getSalario() + ":"
 				+ getComissao() + ":" + getAjudaCusto() + ":" + getCliente();
 
 	}

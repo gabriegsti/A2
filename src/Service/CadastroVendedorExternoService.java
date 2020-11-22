@@ -18,7 +18,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public class VendedorExternoService extends Application {
+public class CadastroVendedorExternoService extends Application {
 	private static Stage telaVendedorExternoStage = new Stage();
 	File arquivo = null;
 	FileWriter recebearquivo = null;
@@ -59,7 +59,6 @@ public class VendedorExternoService extends Application {
 
 	}
 
-	
 	public void gravaVendedorEmTexto(VendedorExterno v) {
 		abreUmArquivo();
 
@@ -97,8 +96,8 @@ public class VendedorExternoService extends Application {
 					id = Integer.parseInt(campos[0].trim());
 					nome = campos[1].trim();
 					telefone = campos[2].trim();
-					
-					dataDeNascimento = LocalDate.parse(campos[3].trim(),Pessoa.formatter);
+
+					dataDeNascimento = LocalDate.parse(campos[3].trim(), Pessoa.formatter);
 					salario = Double.parseDouble(campos[4].trim());
 					comissao = Double.parseDouble(campos[5].trim());
 					ajudaDeCusto = Double.parseDouble(campos[6].trim());
@@ -119,13 +118,14 @@ public class VendedorExternoService extends Application {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void gravaTreeSetDeVendedoresExternosEmTexto() {
-		
+
 		for (VendedorExterno umVendedorExterno : this.treeSetvendedorNovos) {
 			gravaVendedorEmTexto(umVendedorExterno);
 		}
-		lerVendedores();//Atualiza o treesetVendedor que mantém em memória uma lista simulando a lista do arquivo.
+		lerVendedores();// Atualiza o treesetVendedor que mantém em memória uma lista simulando a lista
+						// do arquivo.
 		treeSetvendedorNovos.clear();// Limpa os dados desse treeset.
 	}
 
@@ -139,19 +139,18 @@ public class VendedorExternoService extends Application {
 	public void CadastrarVendedorExterno(String nome, String telefone, LocalDate dataDeNascimento, double salario,
 			double comissao, double ajudaDeCusto, String clienteNome, String clienteTelefone,
 			LocalDate clienteDataDeNascimento) {
-		
+
 		try {
 			int id;
 			if (this.treeSetvendedor.isEmpty()) {
 				id = 1;
 			} else {
-				if(this.treeSetvendedorNovos.isEmpty()) {
-				id = this.treeSetvendedor.last().getID() + 1;
-				}else {
-					id = this.treeSetvendedorNovos.last().getID() + 1;
+				if (this.treeSetvendedorNovos.isEmpty()) {
+					id = this.treeSetvendedor.last().getId() + 1;
+				} else {
+					id = this.treeSetvendedorNovos.last().getId() + 1;
 				}
 			}
-			
 
 			this.treeSetvendedorNovos.add(new VendedorExterno(id, nome, telefone, dataDeNascimento, salario, comissao,
 					ajudaDeCusto, clienteNome, clienteTelefone, clienteDataDeNascimento));
@@ -177,6 +176,7 @@ public class VendedorExternoService extends Application {
 		return false;
 	}
 
+	
 
 	@Override
 	public void start(Stage primaryStage) {

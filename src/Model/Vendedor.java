@@ -3,15 +3,15 @@ package Model;
 public abstract class Vendedor extends Pessoa implements Pagavel, Comparable<Vendedor>  {
 	private double salario;
 	private double comissao;
-	private int ID = 0;
+	private int id = 0;
 
 	// methods
 	public int compareTo(Vendedor v) {
 
-		if (this.getID() > v.getID()) {
+		if (this.getId() > v.getId()) {
 			return 1;
 		}
-		if (this.getID() < v.getID()) {
+		if (this.getId() < v.getId()) {
 			return -1;
 		}
 
@@ -19,12 +19,12 @@ public abstract class Vendedor extends Pessoa implements Pagavel, Comparable<Ven
 	}
 
 	// getters and setters
-	public int getID() {
-		return ID;
+	public int getId() {
+		return id;
 	}
 
-	public void setID(int iD) {
-		ID = iD;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public double getComissao() {
