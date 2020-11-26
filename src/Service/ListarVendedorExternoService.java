@@ -17,7 +17,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class ListarVendedorExternoService extends Application {
-	public static Stage ListarTelaVendedorExternoStage = new Stage();
+	public static Stage listarTelaVendedorExternoStage = new Stage();
 	TreeSet<VendedorExterno> treeSetvendedor = new TreeSet<VendedorExterno>();
 	File arquivo = null;
 	FileReader recebearquivoleitura = null;
@@ -137,7 +137,7 @@ public class ListarVendedorExternoService extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			Pane root = FXMLLoader.load(getClass().getResource("../View/ListarVendedoresExterno.fxml"));
+			Pane root = FXMLLoader.load(getClass().getResource("../View/ListarVendedorExterno.fxml"));
 
 			Scene scene = new Scene(root, 660, 400);
 
@@ -153,13 +153,13 @@ public class ListarVendedorExternoService extends Application {
 	// Chama o método start para abrir uma nova janela.
 	public void abrirTela() {
 		try {
-			start(ListarTelaVendedorExternoStage);
+			start(listarTelaVendedorExternoStage);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	public static void fecharTela() {
-		ListarTelaVendedorExternoStage.close();
+		listarTelaVendedorExternoStage.close();
 	}
 }
