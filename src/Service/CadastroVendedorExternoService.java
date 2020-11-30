@@ -19,7 +19,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class CadastroVendedorExternoService extends Application {
-	private static Stage telaVendedorExternoStage = new Stage();
+	private static Stage cadastroTelaVendedorExternoService = new Stage();
 	File arquivo = null;
 	FileWriter recebearquivo = null;
 	BufferedWriter escreve = null;
@@ -197,7 +197,7 @@ public class CadastroVendedorExternoService extends Application {
 	// Chama o método start para abrir uma nova janela.
 	public void abrirTela() {
 		try {
-			start(telaVendedorExternoStage);
+			start(cadastroTelaVendedorExternoService);
 			abreUmArquivo();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -205,7 +205,7 @@ public class CadastroVendedorExternoService extends Application {
 	}
 
 	public static void fecharTela() {
-		telaVendedorExternoStage.close();
+		cadastroTelaVendedorExternoService.close();
 	}
 
 }
