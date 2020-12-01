@@ -2,12 +2,14 @@ package Controller;
 
 import Service.AtualizarVendedorExternoService;
 import Service.CadastroVendedorExternoService;
+import Service.DeletarVendedorExternoService;
 import Service.ListarVendedorExternoService;
 import Service.TelaInicialService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
 public class TelaInicialController {
+
 
 	CadastroVendedorExternoService cadastroTelaVendedorExternoService = new CadastroVendedorExternoService();
 	ListarVendedorExternoService listarTelaVendedorExternoService = new ListarVendedorExternoService();
@@ -38,4 +40,9 @@ public class TelaInicialController {
 	
 	
 
+	@FXML
+	public void abrirDeletardeVendedorExternoAction(ActionEvent event) {
+		DeletartelaVendedorExterno.abrirTela();
+		TelaInicialService.fecharTela();
+	}
 }

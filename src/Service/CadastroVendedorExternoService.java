@@ -74,7 +74,7 @@ public class CadastroVendedorExternoService extends Application {
 	}
 
 	public void lerVendedores() {
-
+		abreUmArquivo();
 		int id;
 		String nome;
 		String telefone;
