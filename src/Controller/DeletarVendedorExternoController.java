@@ -1,7 +1,8 @@
 package Controller;
 
 import Service.DeletarVendedorExternoService;
-import Service.ListarVendedorExternoService;
+import Service.TelaInicialService;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -22,16 +23,27 @@ public class DeletarVendedorExternoController {
 	private TextField capIDtxt;
 
 	DeletarVendedorExternoService deletarVendedorExternoService = new DeletarVendedorExternoService();
-	ListarVendedorExternoService listarVendedorExternoService = new ListarVendedorExternoService();
-
+	TelaInicialService telaInicial = new TelaInicialService();
+	
 	public void buscarPorIdAction() {
 		int id = Integer.parseInt(capIDtxt.getText().trim());
-		listarTextArea.setText(listarVendedorExternoService.buscarPorId(id));
+		listarTextArea.setText(deletarVendedorExternoService.buscarPorId(id));
 	}
 
 	public void deletarPorIdAction() {
 		int id = Integer.parseInt(capIDtxt.getText().trim());
 		deletarVendedorExternoService.deletaUmVendedor(id);
 	}
+	public void SalvarAction() {
+		deletarVendedorExternoService.Salvar();
+	}
+	
+	 @FXML
+	private void VoltarParaTelaInicialAction(ActionEvent event) {
+		telaInicial.abrirTela();
+		DeletarVendedorExternoService.fecharTela();
+	}
+	
+	
 
 }

@@ -14,6 +14,7 @@ public class TelaInicialController {
 	CadastroVendedorExternoService cadastroTelaVendedorExternoService = new CadastroVendedorExternoService();
 	ListarVendedorExternoService listarTelaVendedorExternoService = new ListarVendedorExternoService();
 	AtualizarVendedorExternoService atualizarTelaVendedorExternoService = new AtualizarVendedorExternoService();
+	DeletarVendedorExternoService deletarTelaVendedorExterno = new DeletarVendedorExternoService();
 	TelaInicialService tela = new TelaInicialService();
 
 	public void abrirTelaInicial() {
@@ -42,7 +43,7 @@ public class TelaInicialController {
 
 	@FXML
 	public void abrirDeletardeVendedorExternoAction(ActionEvent event) {
-		DeletartelaVendedorExterno.abrirTela();
+		deletarTelaVendedorExterno.abrirTela();
 		TelaInicialService.fecharTela();
 	}
 }

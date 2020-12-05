@@ -24,11 +24,11 @@ public class ListarVendedorExternoController {
 
 	ListarVendedorExternoService listarVendedorExternoService = new ListarVendedorExternoService();
 	TelaInicialService telaInicial = new TelaInicialService();
-	    @FXML
-	   	private void VoltarParaTelaInicialAction(ActionEvent event) {
-	   		telaInicial.abrirTela();
-	   		ListarVendedorExternoService.fecharTela();
-	   	}
+    @FXML
+   	private void VoltarParaTelaInicialAction(ActionEvent event) {
+   		telaInicial.abrirTela();
+   		ListarVendedorExternoService.fecharTela();
+   	}
 	
 	public void buscarPorIdAction() {
 		int id = Integer.parseInt(BuscarPorIdtxt.getText().trim());

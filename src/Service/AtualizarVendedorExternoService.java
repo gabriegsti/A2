@@ -33,8 +33,8 @@ public class AtualizarVendedorExternoService extends Application {
 	public void abreUmArquivo() {
 		try {
 			arquivo = new File("arquivoTemporario.txt");
-			
-			recebearquivo = new FileWriter(arquivo,false);
+
+			recebearquivo = new FileWriter(arquivo, false);
 
 			escreve = new BufferedWriter(recebearquivo);
 
@@ -45,22 +45,17 @@ public class AtualizarVendedorExternoService extends Application {
 	}
 
 	public void gerenciaArquivos() {
-		
+
 		File arquivoOriginal = new File("arquivo.txt");
-		
+
 		System.out.println("\n Gerencía: \n");
 		System.out.println(this.treeSetvendedor);
-		//arquivoOriginal.delete();
-			// Apaga o arquivo original
-			if (!arquivoOriginal.delete()) {
-				System.out.println("Não foi possivel atualizar o arquivo original");
-			}
-			
-			if (! this.arquivo.renameTo( new File("arquivo.txt")))
-				System.out.println("Não foi possivel finalizar a atualização do arquivo");
-			
-			
-		
+		// Apaga o arquivo original
+		arquivoOriginal.delete();
+
+		if (!this.arquivo.renameTo(new File("arquivo.txt")))
+			System.out.println("Não foi possivel finalizar a atualização do arquivo");
+
 	}
 
 	public void fechaUmArquivo() {
@@ -77,8 +72,6 @@ public class AtualizarVendedorExternoService extends Application {
 	}
 
 	public void gravaVendedorEmTexto(VendedorExterno v) {
-		
-
 		try {
 
 			escreve.write(v.toString());
@@ -97,7 +90,7 @@ public class AtualizarVendedorExternoService extends Application {
 			for (VendedorExterno umVendedorExterno : this.treeSetvendedor) {
 				gravaVendedorEmTexto(umVendedorExterno);
 			}
-			
+
 			fechaUmArquivo();
 			gerenciaArquivos();
 			lerVendedores();// Atualiza o treesetVendedor que mantém em memória uma lista simulando a lista
@@ -126,7 +119,7 @@ public class AtualizarVendedorExternoService extends Application {
 				VendedorExterno vendedorAux = new VendedorExterno();
 				VendedorExterno v2 = new VendedorExterno();
 				for (VendedorExterno v : treeSetvendedor) {
-					
+
 					if (v.getId() == id) {
 						v2 = new VendedorExterno(id, nome, telefone,
 								LocalDate.parse(dataDeNascimento, Pessoa.formatter), Double.parseDouble(salario.trim()),
@@ -135,16 +128,14 @@ public class AtualizarVendedorExternoService extends Application {
 								LocalDate.parse(clienteDataDeNascimento, Pessoa.formatter));
 						System.out.println(v.toString());
 						vendedorAux = v;
-							break;
-					}					
+						break;
+					}
 				}
 				System.out.println(this.treeSetvendedor);
 				this.treeSetvendedor.remove(vendedorAux);
 				this.treeSetvendedor.add(v2);
 				System.out.println(this.treeSetvendedor);
 				System.out.println("\n fim \n");
-
-
 
 			}
 
@@ -183,7 +174,7 @@ public class AtualizarVendedorExternoService extends Application {
 	}
 
 	public void lerVendedores() {
-		
+
 		int id;
 		String nome;
 		String telefone;
@@ -198,25 +189,25 @@ public class AtualizarVendedorExternoService extends Application {
 		try {
 			abreUmArquivoLeitura();
 
-				while ((registro = leDeArquivo.readLine()) != null) {
-					String[] campos = new String[11];
-					campos = registro.split(":");
+			while ((registro = leDeArquivo.readLine()) != null) {
+				String[] campos = new String[11];
+				campos = registro.split(":");
 
-					id = Integer.parseInt(campos[0].trim());
-					nome = campos[1].trim();
-					telefone = campos[2].trim();
+				id = Integer.parseInt(campos[0].trim());
+				nome = campos[1].trim();
+				telefone = campos[2].trim();
 
-					dataDeNascimento = LocalDate.parse(campos[3].trim(), Pessoa.formatter);
-					salario = Double.parseDouble(campos[4].trim());
-					comissao = Double.parseDouble(campos[5].trim());
-					ajudaDeCusto = Double.parseDouble(campos[6].trim());
-					clienteNome = campos[7].trim();
-					clienteTelefone = campos[8].trim();
-					clienteDataDeNascimento = LocalDate.parse(campos[9].trim(), Pessoa.formatter);
+				dataDeNascimento = LocalDate.parse(campos[3].trim(), Pessoa.formatter);
+				salario = Double.parseDouble(campos[4].trim());
+				comissao = Double.parseDouble(campos[5].trim());
+				ajudaDeCusto = Double.parseDouble(campos[6].trim());
+				clienteNome = campos[7].trim();
+				clienteTelefone = campos[8].trim();
+				clienteDataDeNascimento = LocalDate.parse(campos[9].trim(), Pessoa.formatter);
 
-					treeSetvendedor.add(new VendedorExterno(id, nome, telefone, dataDeNascimento, salario, comissao,
-							ajudaDeCusto, clienteNome, clienteTelefone, clienteDataDeNascimento));
-				
+				treeSetvendedor.add(new VendedorExterno(id, nome, telefone, dataDeNascimento, salario, comissao,
+						ajudaDeCusto, clienteNome, clienteTelefone, clienteDataDeNascimento));
+
 			}
 		} catch (FileNotFoundException e) { // tratando quando o arquivo não existe
 			System.err.println("Erro: arquivo nao existe. " + arquivo);

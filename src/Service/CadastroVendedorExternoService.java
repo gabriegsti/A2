@@ -34,7 +34,7 @@ public class CadastroVendedorExternoService extends Application {
 			arquivo = new File("arquivo.txt");
 
 			if (arquivo.exists()) {
-				recebearquivo = new FileWriter(arquivo, true); // Permite acrescentar dados ao final do arquivo.
+				recebearquivo = new FileWriter(arquivo,true); // Permite acrescentar dados ao final do arquivo.
 
 			} else {
 				recebearquivo = new FileWriter(arquivo);// Se não existir, cria o arquivo.
@@ -60,7 +60,6 @@ public class CadastroVendedorExternoService extends Application {
 	}
 
 	public void gravaVendedorEmTexto(VendedorExterno v) {
-		abreUmArquivo();
 
 		try {
 			escreve.write(v.toString());
@@ -68,9 +67,20 @@ public class CadastroVendedorExternoService extends Application {
 
 		} catch (IOException e) {
 			System.out.println("Erro ao tentar escrever no arquivo: " + e.getMessage());
-		} finally {
-			fechaUmArquivo();
 		}
+	}
+
+	public void fechaUmArquivoLeitura() {
+		try {
+
+			leDeArquivo.close();
+			recebearquivoleitura.close();
+
+		} catch (IOException e) {
+			System.out.println(" Erro ao tentar fechar o arquivo: " + e.getMessage());
+
+		}
+
 	}
 
 	public void lerVendedores() {
@@ -107,6 +117,7 @@ public class CadastroVendedorExternoService extends Application {
 
 					treeSetvendedor.add(new VendedorExterno(id, nome, telefone, dataDeNascimento, salario, comissao,
 							ajudaDeCusto, clienteNome, clienteTelefone, clienteDataDeNascimento));
+					System.out.println("Pinta lista: " + treeSetvendedor);
 				}
 			}
 		} catch (FileNotFoundException e) { // tratando quando o arquivo não existe
@@ -116,17 +127,22 @@ public class CadastroVendedorExternoService extends Application {
 		} catch (Exception e) {
 			System.out.println("Erro inesperado na leitura do arquivo \n \n  ");
 			e.printStackTrace();
+		} finally {
+			fechaUmArquivoLeitura();
 		}
 	}
 
 	public void gravaTreeSetDeVendedoresExternosEmTexto() {
-
+		abreUmArquivo();
 		for (VendedorExterno umVendedorExterno : this.treeSetvendedorNovos) {
 			gravaVendedorEmTexto(umVendedorExterno);
 		}
+		fechaUmArquivo();
+		treeSetvendedor.clear();
+		treeSetvendedorNovos.clear();
 		lerVendedores();// Atualiza o treesetVendedor que mantém em memória uma lista simulando a lista
 						// do arquivo.
-		treeSetvendedorNovos.clear();// Limpa os dados desse treeset.
+
 	}
 
 	// Salvar os dados em memória no arquivo
@@ -139,20 +155,20 @@ public class CadastroVendedorExternoService extends Application {
 	public void CadastrarVendedorExterno(String nome, String telefone, LocalDate dataDeNascimento, double salario,
 			double comissao, double ajudaDeCusto, String clienteNome, String clienteTelefone,
 			LocalDate clienteDataDeNascimento) {
-
+		lerVendedores();
+		System.out.println("Pinta Lista2:"+treeSetvendedor);
 		try {
 			int id;
-			if (this.treeSetvendedor.isEmpty()) {
+			if (treeSetvendedor.isEmpty()) {
 				id = 1;
 			} else {
-				if (this.treeSetvendedorNovos.isEmpty()) {
-					id = this.treeSetvendedor.last().getId() + 1;
-				} else {
-					id = this.treeSetvendedorNovos.last().getId() + 1;
-				}
+//				id = treeSetvendedorNovos.size();
+//				id = id + treeSetvendedor.size();
+//				id = id + 1;
+				id = treeSetvendedorNovos.size() + treeSetvendedor.size() + 1;
 			}
-
-			this.treeSetvendedorNovos.add(new VendedorExterno(id, nome, telefone, dataDeNascimento, salario, comissao,
+			System.out.println("ID: " + id);
+			treeSetvendedorNovos.add(new VendedorExterno(id, nome, telefone, dataDeNascimento, salario, comissao,
 					ajudaDeCusto, clienteNome, clienteTelefone, clienteDataDeNascimento));
 
 		} catch (Exception e) {
@@ -176,8 +192,6 @@ public class CadastroVendedorExternoService extends Application {
 		return false;
 	}
 
-	
-
 	@Override
 	public void start(Stage primaryStage) {
 		try {
@@ -187,7 +201,6 @@ public class CadastroVendedorExternoService extends Application {
 
 			primaryStage.setScene(scene);
 			primaryStage.show();
-			lerVendedores();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -198,7 +211,7 @@ public class CadastroVendedorExternoService extends Application {
 	public void abrirTela() {
 		try {
 			start(cadastroTelaVendedorExternoService);
-			abreUmArquivo();
+			lerVendedores();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
