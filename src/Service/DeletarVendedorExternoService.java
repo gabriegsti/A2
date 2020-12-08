@@ -129,6 +129,9 @@ public class DeletarVendedorExternoService extends Application {
 					treeSetvendedor.add(new VendedorExterno(id, nome, telefone, dataDeNascimento, salario, comissao,
 							ajudaDeCusto, clienteNome, clienteTelefone, clienteDataDeNascimento));
 				}
+				
+					fechaUmArquivoLeitura();
+				
 			}
 		} catch (FileNotFoundException e) { // tratando quando o arquivo não existe
 			System.err.println("Erro: arquivo nao existe. " + arquivo);
@@ -137,9 +140,7 @@ public class DeletarVendedorExternoService extends Application {
 		} catch (Exception e) {
 			System.out.println("Erro inesperado na leitura do arquivo \n \n  ");
 			e.printStackTrace();
-		} finally {
-			fechaUmArquivoLeitura();
-		}
+		} 
 	}
 
 	public void deletaUmVendedor(int auxID) {

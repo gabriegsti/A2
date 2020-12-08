@@ -206,7 +206,9 @@ public class AtualizarVendedorExternoService extends Application {
 				treeSetvendedor.add(new VendedorExterno(id, nome, telefone, dataDeNascimento, salario, comissao,
 						ajudaDeCusto, clienteNome, clienteTelefone, clienteDataDeNascimento));
 
+				
 			}
+			
 		} catch (FileNotFoundException e) { // tratando quando o arquivo não existe
 			System.err.println("Erro: arquivo nao existe. " + arquivo);
 		} catch (IOException e) { // tratando quando há erro no readLine()

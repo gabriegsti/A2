@@ -128,6 +128,7 @@ public class CadastroVendedorExternoService extends Application {
 			System.out.println("Erro inesperado na leitura do arquivo \n \n  ");
 			e.printStackTrace();
 		} finally {
+			fechaUmArquivo();
 			fechaUmArquivoLeitura();
 		}
 	}
@@ -159,8 +160,9 @@ public class CadastroVendedorExternoService extends Application {
 		System.out.println("Pinta Lista2:"+treeSetvendedor);
 		try {
 			int id;
-			if (treeSetvendedor.isEmpty()) {
+			if (treeSetvendedor.isEmpty() && treeSetvendedorNovos.isEmpty()) {
 				id = 1;
+				
 			} else {
 //				id = treeSetvendedorNovos.size();
 //				id = id + treeSetvendedor.size();
