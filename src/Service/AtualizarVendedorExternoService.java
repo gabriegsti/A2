@@ -45,16 +45,14 @@ public class AtualizarVendedorExternoService extends Application {
 	}
 
 	public void gerenciaArquivos() {
-
+		// Apaga o arquivo original
 		File arquivoOriginal = new File("arquivo.txt");
-
+				arquivoOriginal.delete();
 		System.out.println("\n Gerencía: \n");
 		System.out.println(this.treeSetvendedor);
-		// Apaga o arquivo original
-		arquivoOriginal.delete();
-
-		if (!this.arquivo.renameTo(new File("arquivo.txt")))
-			System.out.println("Não foi possivel finalizar a atualização do arquivo");
+		
+		this.arquivo.renameTo(new File("arquivo.txt"));
+			//System.out.println("Não foi possivel finalizar a atualização do arquivo");
 
 	}
 

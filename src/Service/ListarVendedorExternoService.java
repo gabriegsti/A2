@@ -83,9 +83,23 @@ public class ListarVendedorExternoService extends Application {
 		} catch (Exception e) {
 			System.out.println("Erro inesperado na leitura do arquivo \n \n  ");
 			e.printStackTrace();
+		}finally {
+			fechaUmArquivoLeitura();
 		}
 	}
 
+	public void fechaUmArquivoLeitura() {
+		try {
+
+			leDeArquivo.close();
+			recebearquivoleitura.close();
+
+		} catch (IOException e) {
+			System.out.println(" Erro ao tentar fechar o arquivo: " + e.getMessage());
+
+		}
+
+	}
 	public String buscarPorId(int id) {
 		lerVendedores();
 		if (!treeSetvendedor.isEmpty()) {
